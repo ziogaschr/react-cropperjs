@@ -1,6 +1,6 @@
 # react-cropper
 
-[Cropper](https://github.com/fengyuanchen/cropper) as React components
+[cropperjs](https://github.com/fengyuanchen/cropperjs) as a React component.
 
 [![NPM](https://nodei.co/npm/react-cropper.png)](https://www.npmjs.com/package/react-cropper)
 
