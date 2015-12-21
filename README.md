@@ -1,9 +1,8 @@
 # react-cropperjs
 
-[cropperjs](https://github.com/fengyuanchen/cropperjs) as a React component.
+[cropperjs](https://github.com/tapp-tv/cropperjs) as a React component.
 
-[![NPM](https://nodei.co/npm/react-cropper.png)](https://www.npmjs.com/package/react-cropper)
-
+[See the demo in action](http://tapp-tv.github.io/react-cropperjs/example/)
 
 ## Docs
 * [Image Cropper](https://github.com/tapp-tv/react-cropperjs)
@@ -45,10 +44,6 @@ For example in `gulp` you should do
 ```js
 b.transform(browserifycss, {global: true});
 ```
-
-## Todo
-* Unit test
-* Put demo in [http://roadmanfong.github.io/react-cropper/](http://roadmanfong.github.io/react-cropper/)
 
 ## Quick Example
 ```js
