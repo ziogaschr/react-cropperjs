@@ -12,9 +12,8 @@
     "build-example": "npm run build && webpack example/index.js --config example/webpack.config.js --output-path example/assets"
   },
   "author": "Fong Kuanghuei <waneblade@gmail.com>",
-  "homepage": "http://roadmanfong.github.io/react-cropper/",
   "bugs": {
-    "url": "https://github.com/roadmanfong/react-cropper/issues"
+    "url": "https://github.com/tapp-tv/react-cropperjs/issues"
   },
   "keywords": [
     "react",
@@ -25,7 +24,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/roadmanfong/react-cropper.git"
+    "url": "https://github.com/TAPP-TV/react-cropperjs.git"
   },
   "dependencies": {
     "cropper": "^0.11.1",
