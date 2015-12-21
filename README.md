@@ -4,20 +4,16 @@
 
 [![NPM](https://nodei.co/npm/react-cropper.png)](https://www.npmjs.com/package/react-cropper)
 
-[Demo](http://roadmanfong.github.io/react-cropper/example/)
-
 
 ## Docs
-* [Image Cropper](https://github.com/fengyuanchen/cropper)
+* [Image Cropper](https://github.com/tapp-tv/react-cropperjs)
 
 ## Installation
->> Before you install react-cropper please make sure `npm install jquery --save` first
->> or it will install another jquery depedency deep in `react-cropper/node_modules/cropper/node_modules/jquery`
 
-Install via [npm](https://www.npmjs.com/package/react-cropper)
+Install via [npm](https://www.npmjs.com/package/react-cropperjs)
 
 ```shell
-npm install --save react-cropper
+npm install --save react-cropperjs
 ```
 
 ### Webpack User
@@ -65,7 +61,7 @@ var Demo = React.createClass({
 
   render: function() {
     return (
-      <Cropper
+      <CropperJS
         ref='cropper'
         src='http://fengyuanchen.github.io/cropper/img/picture.jpg'
         style={{height: 400, width: '100%'}}
@@ -86,7 +82,7 @@ var Demo = React.createClass({
 * Default: `null`
 
 ```js
-  <Cropper src='http://fengyuanchen.github.io/cropper/img/picture.jpg' />
+  <CropperJS src='http://fengyuanchen.github.io/cropper/img/picture.jpg' />
 ```
 
 ### Other options
@@ -94,7 +90,7 @@ var Demo = React.createClass({
 Accept all options in the [docs](https://github.com/fengyuanchen/cropper#options) as attributes.
 
 ```js
-  <Cropper
+  <CropperJS
     src='http://fengyuanchen.github.io/cropper/img/picture.jpg'
     aspectRatio={16 / 9} 
     guides={false} 
@@ -114,7 +110,7 @@ var Demo = React.createClass({
 
   render: function() {
     return (
-      <Cropper
+      <CropperJS
         ref='cropper'
         crop={this._crop} />
     );
