@@ -137,11 +137,7 @@ const CropperJS = React.createClass({
         options[prop] = this.props[prop];
       }
     }
-    // this.$img = $(this.refs.img);
-    // this.$img = React.findDOMNode(this.refs.img);
-    // this.$img.cropper(options);
     this.cropper = new Cropper(this.refs.img, options);
-    debugger;
   },
 
   componentWillReceiveProps(nextProps) {
@@ -244,14 +240,14 @@ const CropperJS = React.createClass({
     return (
       <div {...this.props} src={null} crossOrigin={null} alt={null}>
         <img
-      crossOrigin={this.props.crossOrigin}
-      ref='img'
-      src={this.props.src}
-      alt={this.props.alt === undefined ? 'picture' : this.props.alt}
-      style={{
-        opacity: 0
-      }}
-      />
+          crossOrigin={this.props.crossOrigin}
+          ref='img'
+          src={this.props.src}
+          alt={this.props.alt === undefined ? 'picture' : this.props.alt}
+          style={{
+            opacity: 0
+          }}
+        />
       </div>
       );
   }
