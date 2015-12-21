@@ -1,11 +1,10 @@
 # react-cropperjs
 
-[cropperjs](https://github.com/fengyuanchen/cropperjs) as a React component.
+[cropperjs](https://github.com/fengyuanchen/cropperjs) as a React component without jQuery as a dependency. If you want to use jQuery, check out the original project [react-cropper](https://github.com/roadmanfong/react-cropper).
+
+## Demo
 
 [See the demo in action](http://tapp-tv.github.io/react-cropperjs/example/)
-
-## Docs
-* [Image Cropper](https://github.com/tapp-tv/react-cropperjs)
 
 ## Installation
 
@@ -47,7 +46,7 @@ b.transform(browserifycss, {global: true});
 
 ## Quick Example
 ```js
-var Cropper = require('react-cropper');
+var Cropper = require('react-cropperjs');
 var Demo = React.createClass({
   _crop: function(){
     // image in dataUrl
@@ -82,7 +81,7 @@ var Demo = React.createClass({
 
 ### Other options
 
-Accept all options in the [docs](https://github.com/fengyuanchen/cropper#options) as attributes.
+Accept all options in the [docs](https://github.com/fengyuanchen/cropperjs) as attributes.
 
 ```js
   <CropperJS
@@ -135,7 +134,7 @@ componentDidMount: function(){
 npm run build
 ```
 
-## Author
+## Original Author
 Fong Kuanghuei(waneblade@gmail.com)
 
 ## License
