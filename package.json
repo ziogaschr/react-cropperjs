@@ -1,6 +1,6 @@
 {
   "name": "react-cropperjs",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Cropper as React components",
   "main": "dist/react-cropper.js",
   "scripts": {
@@ -13,7 +13,7 @@
   },
   "author": "Fong Kuanghuei <waneblade@gmail.com>",
   "bugs": {
-    "url": "https://github.com/tapp-tv/react-cropperjs/issues"
+    "url": "https://github.com/TAPP-TV/react-cropperjs/issues"
   },
   "keywords": [
     "react",
