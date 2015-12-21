@@ -1,4 +1,4 @@
-# react-cropper
+# react-cropperjs
 
 [cropperjs](https://github.com/fengyuanchen/cropperjs) as a React component.
 
