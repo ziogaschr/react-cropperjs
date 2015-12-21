@@ -7,7 +7,7 @@ const Demo = React.createClass({
 
   getInitialState() {
     return {
-      src: 'http://fengyuanchen.github.io/cropper/img/picture.jpg',
+      src: 'http://i.imgur.com/n483ZwJ.jpg',
       preview: null
     };
   },
@@ -43,6 +43,7 @@ const Demo = React.createClass({
         <div className='box' style={{width: '70%', float: 'left'}}>
           <input type='file' onChange={this._onChange} />
           <button onClick={this._useDefaultImage}>Use default img</button>
+          <br/>
           <br/>
           <CropperJS
             style={{height: 400, width: '100%'}}
