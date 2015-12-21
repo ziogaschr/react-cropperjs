@@ -1,6 +1,6 @@
 # react-cropperjs
 
-[cropperjs](https://github.com/tapp-tv/cropperjs) as a React component.
+[cropperjs](https://github.com/fengyuanchen/cropperjs) as a React component.
 
 [See the demo in action](http://tapp-tv.github.io/react-cropperjs/example/)
 
