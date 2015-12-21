@@ -28,12 +28,6 @@ module.exports = {
     extensions: ['', '.js', '.jsx', '.json']
   },
   plugins: [
-    new webpack.ProvidePlugin({
-      $: 'jquery',
-      jQuery: 'jquery',
-      'window.jQuery': 'jquery',
-      'root.jQuery': 'jquery'
-    }),
     new ExtractTextPlugin('bundle.css')
   ]
 };

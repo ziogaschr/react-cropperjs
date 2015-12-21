@@ -1,9 +1,85 @@
 import React from 'react';
-import $ from 'jquery';
-import 'cropper';
-import 'cropper/dist/cropper.css';
+import Cropper from 'cropperjs';
+import 'cropperjs/dist/cropper.css';
 
-const Cropper = React.createClass({
+/**
+ * Utilities extracted from https://github.com/fengyuanchen/cropperjs/blob/master/src/js/utilities.js
+ */
+
+var REGEXP_SPACES = /\s+/;
+var REGEXP_TRIM = /^\s+(.*)\s+$/;
+
+function trim(str) {
+  if (typeof str === 'string') {
+    str = str.trim ? str.trim() : str.replace(REGEXP_TRIM, '$1');
+  }
+
+  return str;
+}
+
+function each(obj, callback) {
+  var length;
+  var i;
+
+  if (obj && isFunction(callback)) {
+    if (isArray(obj) || isNumber(obj.length) /* array-like */ ) {
+      for (i = 0, length = obj.length; i < length; i++) {
+        if (callback.call(obj, obj[i], i, obj) === false) {
+          break;
+        }
+      }
+    } else if (isObject(obj)) {
+      for (i in obj) {
+        if (obj.hasOwnProperty(i)) {
+          if (callback.call(obj, obj[i], i, obj) === false) {
+            break;
+          }
+        }
+      }
+    }
+  }
+  return obj;
+}
+
+function typeOf(obj) {
+  return toString.call(obj).slice(8, -1).toLowerCase();
+}
+
+function isFunction(fn) {
+  return typeOf(fn) === 'function';
+}
+
+function isArray(arr) {
+  return Array.isArray ? Array.isArray(arr) : typeOf(arr) === 'array';
+}
+
+function isNumber(num) {
+  return typeof num === 'number' && !isNaN(num);
+}
+
+function isObject(obj) {
+  return typeof obj === 'object' && obj !== null;
+}
+
+function addListener(element, type, handler) {
+  var types = trim(type).split(REGEXP_SPACES);
+
+  if (types.length > 1) {
+    return each(types, function(type) {
+      addListener(element, type, handler);
+    });
+  }
+
+  if (element.addEventListener) {
+    element.addEventListener(type, handler, false);
+  } else if (element.attachEvent) {
+    element.attachEvent('on' + type, handler);
+  }
+}
+
+/* end utilities */
+
+const CropperJS = React.createClass({
 
   propTypes: {
     // react cropper options
@@ -56,122 +132,129 @@ const Cropper = React.createClass({
 
   componentDidMount() {
     var options = {};
-    for(var prop in this.props){
-      if(prop !== 'src' && prop !== 'alt' && prop !== 'crossOrigin'){
+    for (var prop in this.props) {
+      if (prop !== 'src' && prop !== 'alt' && prop !== 'crossOrigin') {
         options[prop] = this.props[prop];
       }
     }
-    this.$img = $(this.refs.img);
-    this.$img.cropper(options);
+    // this.$img = $(this.refs.img);
+    // this.$img = React.findDOMNode(this.refs.img);
+    // this.$img.cropper(options);
+    this.cropper = new Cropper(this.refs.img, options);
+    debugger;
   },
 
   componentWillReceiveProps(nextProps) {
-    if(nextProps.src !== this.props.src){
+    if (nextProps.src !== this.props.src) {
       this.replace(nextProps.src);
     }
-    if(nextProps.aspectRatio !== this.props.aspectRatio){
+    if (nextProps.aspectRatio !== this.props.aspectRatio) {
       this.setAspectRatio(nextProps.aspectRatio);
     }
   },
 
   componentWillUnmount() {
-    if(this.$img) {
+    if (this.cropper) {
       // Destroy the cropper, this makes sure events such as resize are cleaned up and do not leak
-      this.$img.cropper('destroy');
-      // While we're at it remove our reference to the jQuery instance
-      delete this.$img;
+      this.cropper.destroy();
+    // While we're at it remove our reference to the jQuery instance
+    //   delete this.$img;
     }
   },
 
-  move(offsetX, offsetY){
-    return this.$img.cropper('move', offsetX, offsetY);
+  move(offsetX, offsetY) {
+    return this.cropper.move(offsetX, offsetY);
   },
 
-  zoom(ratio){
-    return this.$img.cropper('zoom', ratio);
+  zoom(ratio) {
+    return this.cropper.zoom(ratio);
   },
 
-  rotate(degree){
-    return this.$img.cropper('rotate', degree);
+  rotate(degree) {
+    return this.cropper.rotate(degree);
   },
 
-  enable(){
-    return this.$img.cropper('enable');
+  enable() {
+    return this.cropper.enable();
   },
 
-  disable(){
-    return this.$img.cropper('disable');
+  disable() {
+    return this.cropper.disable();
   },
 
-  reset(){
-    return this.$img.cropper('reset');
+  reset() {
+    return this.cropper.reset();
   },
 
-  clear(){
-    return this.$img.cropper('clear');
+  clear() {
+    return this.cropper.clear();
   },
 
-  replace(url){
-    return this.$img.cropper('replace', url);
+  replace(url) {
+    return this.cropper.replace(url);
   },
 
-  getData(rounded){
-    return this.$img.cropper('getData', rounded);
+  getData(rounded) {
+    return this.cropper.getData(rounded);
   },
 
-  getContainerData(){
-    return this.$img.cropper('getContainerData');
+  getContainerData() {
+    return this.cropper.getContainerData();
   },
 
-  getImageData(){
-    return this.$img.cropper('getImageData');
+  getImageData() {
+    return this.cropper.getImageData();
   },
 
-  getCanvasData(){
-    return this.$img.cropper('getCanvasData');
+  getCanvasData() {
+    return this.cropper.getCanvasData();
   },
 
-  setCanvasData(data){
-    return this.$img.cropper('setCanvasData', data);
+  setCanvasData(data) {
+    return this.cropper.setCanvasData(data);
   },
 
-  getCropBoxData(){
-    return this.$img.cropper('getCropBoxData');
+  getCropBoxData() {
+    return this.cropper.getCropBoxData();
   },
 
-  setCropBoxData(data){
-    return this.$img.cropper('setCropBoxData', data);
+  setCropBoxData(data) {
+    return this.cropper.setCropBoxData(data);
   },
 
-  getCroppedCanvas(options){
-    return this.$img.cropper('getCroppedCanvas', options);
+  getCroppedCanvas(options) {
+    return this.cropper.getCroppedCanvas(options);
   },
 
-  setAspectRatio(aspectRatio){
-    return this.$img.cropper('setAspectRatio', aspectRatio);
+  setAspectRatio(aspectRatio) {
+    return this.cropper.setAspectRatio(aspectRatio);
   },
 
-  setDragMode(){
-    return this.$img.cropper('setDragMode');
+  setDragMode() {
+    return this.cropper.setDragMode();
   },
 
-  on(eventname, callback){
-    return this.$img.on(eventname, callback);
+  on(eventname, callback) {
+    console.log(eventname);
+    // return this.$img.on(eventname, callback);
+    return addListener(this.cropper, eventname, callback);
   },
 
   render() {
     return (
       <div {...this.props} src={null} crossOrigin={null} alt={null}>
         <img
-          crossOrigin={this.props.crossOrigin}
-          ref='img'
-          src={this.props.src}
-          alt={this.props.alt === undefined ? 'picture' : this.props.alt}
-          style={{opacity: 0}}
-          />
+      crossOrigin={this.props.crossOrigin}
+      ref='img'
+      src={this.props.src}
+      alt={this.props.alt === undefined ? 'picture' : this.props.alt}
+      style={{
+        opacity: 0
+      }}
+      />
       </div>
-    );
+      );
   }
 });
 
-export default Cropper;
+export default CropperJS;

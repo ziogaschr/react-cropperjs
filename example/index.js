@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import Cropper from '../dist/react-cropper';
+import CropperJS from '../dist/react-cropper';
 
 const Demo = React.createClass({
 
@@ -12,13 +12,13 @@ const Demo = React.createClass({
     };
   },
 
-  _crop(){
+  _crop() {
     this.setState({
       preview: this.refs.cropper.getCroppedCanvas().toDataURL()
     });
   },
 
-  _onChange(e){
+  _onChange(e) {
     e.preventDefault();
     let files;
     if (e.dataTransfer) {
@@ -28,38 +28,55 @@ const Demo = React.createClass({
     }
     let reader = new FileReader();
     reader.onload = () => {
-      this.setState({src: reader.result});
+      this.setState({
+        src: reader.result
+      });
     };
     reader.readAsDataURL(files[0]);
   },
 
-  _useDefaultImage(){
-    this.setState({src: this.getInitialState().src});
+  _useDefaultImage() {
+    this.setState({
+      src: this.getInitialState().src
+    });
   },
 
   render() {
     return (
       <div>
-        <div className='box' style={{width: '70%', float: 'left'}}>
+        <div className='box' style={{
+        width: '70%',
+        float: 'left'
+      }}>
           <input type='file' onChange={this._onChange} />
           <button onClick={this._useDefaultImage}>Use default img</button>
           <br/>
-          <Cropper
-            style={{height: 400, width: '100%'}}
-            aspectRatio={16 / 9}
-            guides={false}
-            src={this.state.src}
-            ref='cropper'
-            crop={this._crop} />
+          <CropperJS
+      style={{
+        height: 400,
+        width: '100%'
+      }}
+      aspectRatio={16 / 9}
+      guides={false}
+      src={this.state.src}
+      ref='cropper'
+      crop={this._crop} />
         </div>
 
-        <div className='box' style={{width: '30%', float: 'right'}}>
+        <div className='box' style={{
+        width: '30%',
+        float: 'right'
+      }}>
           <h1>Preview</h1>
-          <img style={{width: '100%'}} src={this.state.preview}/>
+          <img style={{
+        width: '100%'
+      }} src={this.state.preview}/>
         </div>
-        <br style={{clear: 'both'}}/>
+        <br style={{
+        clear: 'both'
+      }}/>
       </div>
-    );
+      );
   }
 
 });
