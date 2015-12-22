@@ -1,8 +1,8 @@
 # react-cropperjs
 
-A React Compent wrapper of [cropperjs](https://github.com/fengyuanchen/cropperjs) without jQuery as a dependency. If you want to use jQuery, check out the original project [react-cropper](https://github.com/roadmanfong/react-cropper).
+A React Component wrapper of [cropperjs](https://github.com/fengyuanchen/cropperjs) without jQuery as a dependency. If you want to use jQuery, check out the original project [react-cropper](https://github.com/roadmanfong/react-cropper).
 
-[![NPM](https://nodei.co/npm/react-cropperjs.png)](https://nodei.co/npm/react-cropperjs/)
+[![NPM](https://nodei.co/npm/react-cropperjs.png?downloads=true)](https://nodei.co/npm/react-cropperjs/)
 
 ## Demo
 
@@ -59,7 +59,7 @@ var Demo = React.createClass({
     return (
       <CropperJS
         ref='cropper'
-        src='http://fengyuanchen.github.io/cropper/img/picture.jpg'
+        src='http://i.imgur.com/n483ZwJ.jpg'
         style={{height: 400, width: '100%'}}
         // Cropper.js options
         aspectRatio={16 / 9}
@@ -78,7 +78,7 @@ var Demo = React.createClass({
 * Default: `null`
 
 ```js
-  <CropperJS src='http://fengyuanchen.github.io/cropper/img/picture.jpg' />
+  <CropperJS src='http://i.imgur.com/n483ZwJ.jpg' />
 ```
 
 ### Other options
@@ -87,7 +87,7 @@ Accept all options in the [docs](https://github.com/fengyuanchen/cropperjs) as a
 
 ```js
   <CropperJS
-    src='http://fengyuanchen.github.io/cropper/img/picture.jpg'
+    src='http://i.imgur.com/n483ZwJ.jpg'
     aspectRatio={16 / 9} 
     guides={false} 
     crop={this._crop} />
@@ -136,8 +136,18 @@ componentDidMount: function(){
 npm run build
 ```
 
-## Original Author
-Fong Kuanghuei(waneblade@gmail.com)
+Build example
+```
+npm run build-example
+```
+
+## Related Projects
+
+[JavaScript Canvas to Blob](https://github.com/blueimp/JavaScript-Canvas-to-Blob)
+
+A lot of times, you'll get a `canvas` element drawn with the cropped image and will need to upload it to the server.
+
+You can use [canvas.toDataURL](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/toDataURL) to get a Data URL, or use [canvas.toBlob](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/toBlob) to get a blob and upload it to server with [FormData](https://developer.mozilla.org/en-US/docs/Web/API/FormData) if the browser supports these APIs.
 
 ## License
 MIT
