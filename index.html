@@ -22,9 +22,9 @@
       <h1>
 <a id="react-cropperjs" class="anchor" href="#react-cropperjs" aria-hidden="true"><span class="octicon octicon-link"></span></a>react-cropperjs</h1>
 
-<p><a href="https://github.com/fengyuanchen/cropperjs">cropperjs</a> as a React component without jQuery as a dependency. If you want to use jQuery, check out the original project <a href="https://github.com/roadmanfong/react-cropper">react-cropper</a>.</p>
+<p>A React Component wrapper of <a href="https://github.com/fengyuanchen/cropperjs">cropperjs</a> without jQuery as a dependency. If you want to use jQuery, check out the original project <a href="https://github.com/roadmanfong/react-cropper">react-cropper</a>.</p>
 
-<p><a href="https://nodei.co/npm/react-cropperjs/"><img src="https://nodei.co/npm/react-cropperjs.png" alt="NPM"></a></p>
+<p><a href="https://nodei.co/npm/react-cropperjs/"><img src="https://nodei.co/npm/react-cropperjs.png?downloads=true" alt="NPM"></a></p>
 
 <h2>
 <a id="demo" class="anchor" href="#demo" aria-hidden="true"><span class="octicon octicon-link"></span></a>Demo</h2>
@@ -43,7 +43,7 @@
 
 <p>You also need a couple of loaders for webpack</p>
 
-<div class="highlight highlight-source-shell"><pre>npm install style-loader css-loader</pre></div>
+<div class="highlight highlight-source-shell"><pre>npm install --save-dev style-loader css-loader</pre></div>
 
 <h3>
 <a id="browserify-user" class="anchor" href="#browserify-user" aria-hidden="true"><span class="octicon octicon-link"></span></a>Browserify User</h3>
@@ -63,10 +63,39 @@
 <div class="highlight highlight-source-js"><pre><span class="pl-smi">b</span>.<span class="pl-en">transform</span>(browserifycss, {global<span class="pl-k">:</span> <span class="pl-c1">true</span>});</pre></div>
 
 <h2>
-<a id="quick-example" class="anchor" href="#quick-example" aria-hidden="true"><span class="octicon octicon-link"></span></a>Quick Example</h2>
+<a id="quick-example-using-es6" class="anchor" href="#quick-example-using-es6" aria-hidden="true"><span class="octicon octicon-link"></span></a>Quick Example using ES6</h2>
 
-<div class="highlight highlight-source-js"><pre><span class="pl-k">var</span> Cropper <span class="pl-k">=</span> <span class="pl-c1">require</span>(<span class="pl-s"><span class="pl-pds">'</span>react-cropperjs<span class="pl-pds">'</span></span>);
+<div class="highlight highlight-source-js"><pre><span class="pl-k">import</span> <span class="pl-smi">React</span> <span class="pl-k">from</span> <span class="pl-s"><span class="pl-pds">'</span>react<span class="pl-pds">'</span></span>;
+<span class="pl-k">import</span> <span class="pl-smi">CropperJS</span> <span class="pl-k">from</span> <span class="pl-s"><span class="pl-pds">'</span>react-cropperjs<span class="pl-pds">'</span></span>;
+
+<span class="pl-k">class</span> <span class="pl-en">Demo</span> <span class="pl-k">extends</span> <span class="pl-en">React</span>.<span class="pl-smi">Component</span> {
+
+  <span class="pl-en">_crop</span>(){
+    <span class="pl-c">// image in dataUrl</span>
+    <span class="pl-en">console</span>.<span class="pl-c1">log</span>(<span class="pl-v">this</span>.<span class="pl-smi">refs</span>.<span class="pl-smi">cropper</span>.<span class="pl-en">getCroppedCanvas</span>().<span class="pl-en">toDataURL</span>());
+  }
+
+  <span class="pl-en">render</span>() {
+    <span class="pl-k">return</span> (
+      <span class="pl-k">&lt;</span>CropperJS
+        ref<span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">'</span>cropper<span class="pl-pds">'</span></span>
+        src<span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">'</span>http://i.imgur.com/n483ZwJ.jpg<span class="pl-pds">'</span></span>
+        style<span class="pl-k">=</span>{{height<span class="pl-k">:</span> <span class="pl-c1">400</span>, width<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>100%<span class="pl-pds">'</span></span>}}
+        <span class="pl-c">// Cropper.js options</span>
+        aspectRatio<span class="pl-k">=</span>{<span class="pl-c1">16</span> <span class="pl-k">/</span> <span class="pl-c1">9</span>}
+        guides<span class="pl-k">=</span>{<span class="pl-c1">false</span>}
+        crop<span class="pl-k">=</span>{<span class="pl-v">this</span>.<span class="pl-smi">_crop</span>.<span class="pl-en">bind</span>(<span class="pl-v">this</span>)} <span class="pl-k">/</span><span class="pl-k">&gt;</span>
+    );
+  }
+}</pre></div>
+
+<p>And for those working in ES5:</p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-k">var</span> React <span class="pl-k">=</span> <span class="pl-c1">require</span>(<span class="pl-s"><span class="pl-pds">'</span>react<span class="pl-pds">'</span></span>);
+<span class="pl-k">var</span> CropperJS <span class="pl-k">=</span> <span class="pl-c1">require</span>(<span class="pl-s"><span class="pl-pds">'</span>react-cropperjs<span class="pl-pds">'</span></span>);
+
 <span class="pl-k">var</span> Demo <span class="pl-k">=</span> <span class="pl-smi">React</span>.<span class="pl-en">createClass</span>({
+
   <span class="pl-en">_crop</span><span class="pl-k">:</span> <span class="pl-k">function</span>(){
     <span class="pl-c">// image in dataUrl</span>
     <span class="pl-en">console</span>.<span class="pl-c1">log</span>(<span class="pl-v">this</span>.<span class="pl-smi">refs</span>.<span class="pl-smi">cropper</span>.<span class="pl-en">getCroppedCanvas</span>().<span class="pl-en">toDataURL</span>());
@@ -76,7 +105,7 @@
     <span class="pl-k">return</span> (
       <span class="pl-k">&lt;</span>CropperJS
         ref<span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">'</span>cropper<span class="pl-pds">'</span></span>
-        src<span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">'</span>http://fengyuanchen.github.io/cropper/img/picture.jpg<span class="pl-pds">'</span></span>
+        src<span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">'</span>http://i.imgur.com/n483ZwJ.jpg<span class="pl-pds">'</span></span>
         style<span class="pl-k">=</span>{{height<span class="pl-k">:</span> <span class="pl-c1">400</span>, width<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>100%<span class="pl-pds">'</span></span>}}
         <span class="pl-c">// Cropper.js options</span>
         aspectRatio<span class="pl-k">=</span>{<span class="pl-c1">16</span> <span class="pl-k">/</span> <span class="pl-c1">9</span>}
@@ -100,15 +129,15 @@
 </li>
 </ul>
 
-<div class="highlight highlight-source-js"><pre>  <span class="pl-k">&lt;</span>CropperJS src<span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">'</span>http://fengyuanchen.github.io/cropper/img/picture.jpg<span class="pl-pds">'</span></span> <span class="pl-k">/</span><span class="pl-k">&gt;</span></pre></div>
+<div class="highlight highlight-source-js"><pre>  <span class="pl-k">&lt;</span>CropperJS src<span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">'</span>http://i.imgur.com/n483ZwJ.jpg<span class="pl-pds">'</span></span> <span class="pl-k">/</span><span class="pl-k">&gt;</span></pre></div>
 
 <h3>
 <a id="other-options" class="anchor" href="#other-options" aria-hidden="true"><span class="octicon octicon-link"></span></a>Other options</h3>
 
-<p>Accept all options in the <a href="https://github.com/fengyuanchen/cropperjs">docs</a> as attributes.</p>
+<p>Accepts all options availabe in cropperjs as attributes. See <a href="https://github.com/fengyuanchen/cropperjs">docs</a>.</p>
 
 <div class="highlight highlight-source-js"><pre>  <span class="pl-k">&lt;</span>CropperJS
-    src<span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">'</span>http://fengyuanchen.github.io/cropper/img/picture.jpg<span class="pl-pds">'</span></span>
+    src<span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">'</span>http://i.imgur.com/n483ZwJ.jpg<span class="pl-pds">'</span></span>
     aspectRatio<span class="pl-k">=</span>{<span class="pl-c1">16</span> <span class="pl-k">/</span> <span class="pl-c1">9</span>} 
     guides<span class="pl-k">=</span>{<span class="pl-c1">false</span>} 
     crop<span class="pl-k">=</span>{<span class="pl-v">this</span>.<span class="pl-smi">_crop</span>} <span class="pl-k">/</span><span class="pl-k">&gt;</span></pre></div>
@@ -118,21 +147,26 @@
 
 <p>Assign a <code>ref</code> attribute to use <a href="https://github.com/fengyuanchen/cropper#methods">methods</a></p>
 
-<div class="highlight highlight-source-js"><pre><span class="pl-k">var</span> Demo <span class="pl-k">=</span> <span class="pl-smi">React</span>.<span class="pl-en">createClass</span>({
+<div class="highlight highlight-source-js"><pre><span class="pl-k">import</span> <span class="pl-smi">React</span> <span class="pl-k">from</span> <span class="pl-s"><span class="pl-pds">'</span>react<span class="pl-pds">'</span></span>;
+<span class="pl-k">import</span> <span class="pl-smi">CropperJS</span> <span class="pl-k">from</span> <span class="pl-s"><span class="pl-pds">'</span>react-cropperjs<span class="pl-pds">'</span></span>;
 
-  <span class="pl-en">_crop</span><span class="pl-k">:</span> <span class="pl-k">function</span>(){
-    <span class="pl-k">var</span> dataUrl <span class="pl-k">=</span> <span class="pl-v">this</span>.<span class="pl-smi">refs</span>.<span class="pl-smi">cropper</span>.<span class="pl-en">getCroppedCanvas</span>().<span class="pl-en">toDataURL</span>();
+<span class="pl-k">class</span> <span class="pl-en">Demo</span> <span class="pl-k">extends</span> <span class="pl-en">React</span>.<span class="pl-smi">Component</span> <span class="pl-k">=</span> {
+
+  <span class="pl-en">_crop</span>() {
+    <span class="pl-k">let</span> dataUrl <span class="pl-k">=</span> <span class="pl-v">this</span>.<span class="pl-smi">refs</span>.<span class="pl-smi">cropper</span>.<span class="pl-en">getCroppedCanvas</span>().<span class="pl-en">toDataURL</span>();
     <span class="pl-en">console</span>.<span class="pl-c1">log</span>(dataUrl);
-  },
+  }
 
-  <span class="pl-en">render</span><span class="pl-k">:</span> <span class="pl-k">function</span>() {
+  <span class="pl-en">render</span> () {
     <span class="pl-k">return</span> (
       <span class="pl-k">&lt;</span>CropperJS
         ref<span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">'</span>cropper<span class="pl-pds">'</span></span>
-        crop<span class="pl-k">=</span>{<span class="pl-v">this</span>.<span class="pl-smi">_crop</span>} <span class="pl-k">/</span><span class="pl-k">&gt;</span>
+        crop<span class="pl-k">=</span>{<span class="pl-v">this</span>.<span class="pl-smi">_crop</span>.<span class="pl-en">bind</span>(<span class="pl-v">this</span>)} <span class="pl-k">/</span><span class="pl-k">&gt;</span>
     );
   }
-})</pre></div>
+}</pre></div>
+
+<p><code>React.createClass</code> has a built-in magic feature that bound all methods to <code>this</code> automatically for you. In ES6, remember to pre-bind in the constructor or in the attribute. See <a href="https://facebook.github.io/react/blog/2015/01/27/react-v0.13.0-beta-1.html#autobinding">autobinding</a> docs for more details.</p>
 
 <h2>
 <a id="events" class="anchor" href="#events" aria-hidden="true"><span class="octicon octicon-link"></span></a>Events</h2>
@@ -155,10 +189,19 @@
 <pre><code>npm run build
 </code></pre>
 
-<h2>
-<a id="original-author" class="anchor" href="#original-author" aria-hidden="true"><span class="octicon octicon-link"></span></a>Original Author</h2>
+<p>Build example</p>
 
-<p>Fong Kuanghuei(<a href="mailto:waneblade@gmail.com">waneblade@gmail.com</a>)</p>
+<pre><code>npm run build-example
+</code></pre>
+
+<h2>
+<a id="related-projects" class="anchor" href="#related-projects" aria-hidden="true"><span class="octicon octicon-link"></span></a>Related Projects</h2>
+
+<p><a href="https://github.com/blueimp/JavaScript-Canvas-to-Blob">JavaScript Canvas to Blob</a></p>
+
+<p>A lot of times, you'll get a <code>canvas</code> element drawn with the cropped image and will need to upload it to the server.</p>
+
+<p>You can use <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/toDataURL">canvas.toDataURL</a> to get a Data URL, or use <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/toBlob">canvas.toBlob</a> to get a blob and upload it to server with <a href="https://developer.mozilla.org/en-US/docs/Web/API/FormData">FormData</a> if the browser supports these APIs.</p>
 
 <h2>
 <a id="license" class="anchor" href="#license" aria-hidden="true"><span class="octicon octicon-link"></span></a>License</h2>
