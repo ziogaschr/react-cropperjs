@@ -1,6 +1,6 @@
 # react-cropperjs
 
-[cropperjs](https://github.com/fengyuanchen/cropperjs) as a React component without jQuery as a dependency. If you want to use jQuery, check out the original project [react-cropper](https://github.com/roadmanfong/react-cropper).
+A React Compent wrapper of [cropperjs](https://github.com/fengyuanchen/cropperjs) without jQuery as a dependency. If you want to use jQuery, check out the original project [react-cropper](https://github.com/roadmanfong/react-cropper).
 
 [![NPM](https://nodei.co/npm/react-cropperjs.png)](https://nodei.co/npm/react-cropperjs/)
 
