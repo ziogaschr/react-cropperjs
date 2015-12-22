@@ -21,7 +21,7 @@ npm install --save react-cropperjs
 You also need a couple of loaders for webpack
 
 ```shell
-npm install style-loader css-loader
+npm install --save-dev style-loader css-loader
 ```
 
 ### Browserify User
@@ -46,10 +46,42 @@ For example in `gulp` you should do
 b.transform(browserifycss, {global: true});
 ```
 
-## Quick Example
+## Quick Example using ES6
+
 ```js
-var Cropper = require('react-cropperjs');
+import React from 'react';
+import CropperJS from 'react-cropperjs';
+
+class Demo extends React.Component {
+
+  _crop(){
+    // image in dataUrl
+    console.log(this.refs.cropper.getCroppedCanvas().toDataURL());
+  }
+
+  render() {
+    return (
+      <CropperJS
+        ref='cropper'
+        src='http://i.imgur.com/n483ZwJ.jpg'
+        style={{height: 400, width: '100%'}}
+        // Cropper.js options
+        aspectRatio={16 / 9}
+        guides={false}
+        crop={this._crop.bind(this)} />
+    );
+  }
+}
+```
+
+And for those working in ES5:
+
+```js
+var React = require('react');
+var CropperJS = require('react-cropperjs');
+
 var Demo = React.createClass({
+  
   _crop: function(){
     // image in dataUrl
     console.log(this.refs.cropper.getCroppedCanvas().toDataURL());
@@ -71,6 +103,7 @@ var Demo = React.createClass({
 
 ```
 
+
 ## Options
 
 ### src
@@ -83,7 +116,7 @@ var Demo = React.createClass({
 
 ### Other options
 
-Accept all options in the [docs](https://github.com/fengyuanchen/cropperjs) as attributes.
+Accepts all options availabe in cropperjs as attributes. See [docs](https://github.com/fengyuanchen/cropperjs).
 
 ```js
   <CropperJS
@@ -94,25 +127,31 @@ Accept all options in the [docs](https://github.com/fengyuanchen/cropperjs) as a
 ```
 
 ## Methods
+
 Assign a `ref` attribute to use [methods](https://github.com/fengyuanchen/cropper#methods)
 
 ```js
-var Demo = React.createClass({
+import React from 'react';
+import CropperJS from 'react-cropperjs';
 
-  _crop: function(){
-    var dataUrl = this.refs.cropper.getCroppedCanvas().toDataURL();
+class Demo extends React.Component = {
+
+  _crop() {
+    let dataUrl = this.refs.cropper.getCroppedCanvas().toDataURL();
     console.log(dataUrl);
-  },
+  }
 
-  render: function() {
+  render () {
     return (
       <CropperJS
         ref='cropper'
-        crop={this._crop} />
+        crop={this._crop.bind(this)} />
     );
   }
-})
+}
 ```
+
+`React.createClass` has a built-in magic feature that bound all methods to `this` automatically for you. In ES6, remember to pre-bind in the constructor or in the attribute. See [autobinding](https://facebook.github.io/react/blog/2015/01/27/react-v0.13.0-beta-1.html#autobinding) docs for more details.
 
 ## Events
 
