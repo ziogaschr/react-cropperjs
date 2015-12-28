@@ -54,7 +54,15 @@
 
 	'use strict';
 
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	var _react = __webpack_require__(2);
 
@@ -68,81 +76,149 @@
 
 	var _distReactCropper2 = _interopRequireDefault(_distReactCropper);
 
-	var Demo = _react2['default'].createClass({
-	  displayName: 'Demo',
+	var Demo = (function (_React$Component) {
+	   _inherits(Demo, _React$Component);
 
-	  getInitialState: function getInitialState() {
-	    return {
-	      src: 'http://i.imgur.com/n483ZwJ.jpg',
-	      preview: null
-	    };
-	  },
+	   function Demo() {
+	      _classCallCheck(this, Demo);
 
-	  _crop: function _crop() {
-	    this.setState({
-	      preview: this.refs.cropper.getCroppedCanvas().toDataURL()
-	    });
-	  },
+	      _get(Object.getPrototypeOf(Demo.prototype), 'constructor', this).call(this);
+	      this.state = {
+	         src: 'http://i.imgur.com/n483ZwJ.jpg', // tapptv image (small)
+	         //  src: 'http://i.imgur.com/1gpjD9I.jpg', // iphone sky photo (large)
+	         preview: null
+	      };
+	      this._crop = this._crop.bind(this);
+	      this._onChange = this._onChange.bind(this);
+	      this._useDefaultImage = this._useDefaultImage.bind(this);
+	   }
 
-	  _onChange: function _onChange(e) {
-	    var _this = this;
+	   // Callback functions
 
-	    e.preventDefault();
-	    var files = undefined;
-	    if (e.dataTransfer) {
-	      files = e.dataTransfer.files;
-	    } else if (e.target) {
-	      files = e.target.files;
-	    }
-	    var reader = new FileReader();
-	    reader.onload = function () {
-	      _this.setState({ src: reader.result });
-	    };
-	    reader.readAsDataURL(files[0]);
-	  },
+	   _createClass(Demo, [{
+	      key: '_build',
+	      value: function _build() {
+	         console.log('_build');
+	      }
+	   }, {
+	      key: '_built',
+	      value: function _built() {
+	         console.log('_built');
+	      }
+	   }, {
+	      key: '_cropstart',
+	      value: function _cropstart(data) {
+	         console.log('_cropstart', data.action);
+	      }
+	   }, {
+	      key: '_cropmove',
+	      value: function _cropmove(data) {
+	         console.log('_cropmove', data.action);
+	      }
+	   }, {
+	      key: '_cropend',
+	      value: function _cropend(data) {
+	         console.log('_cropend', data.action);
+	      }
+	   }, {
+	      key: '_zoom',
+	      value: function _zoom(data) {
+	         console.log('_zoom', data.ratio);
+	      }
+	   }, {
+	      key: '_crop',
+	      value: function _crop(data) {
+	         console.log('_crop', data);
+	         this.setState({
+	            preview: this.refs.cropper.getCroppedCanvas().toDataURL()
+	         });
+	      }
 
-	  _useDefaultImage: function _useDefaultImage() {
-	    this.setState({ src: this.getInitialState().src });
-	  },
+	      // end callback functions
 
-	  render: function render() {
-	    return _react2['default'].createElement(
-	      'div',
-	      null,
-	      _react2['default'].createElement(
-	        'div',
-	        { className: 'box', style: { width: '70%', float: 'left' } },
-	        _react2['default'].createElement('input', { type: 'file', onChange: this._onChange }),
-	        _react2['default'].createElement(
-	          'button',
-	          { onClick: this._useDefaultImage },
-	          'Use default img'
-	        ),
-	        _react2['default'].createElement('br', null),
-	        _react2['default'].createElement('br', null),
-	        _react2['default'].createElement(_distReactCropper2['default'], {
-	          style: { height: 400, width: '100%' },
-	          aspectRatio: 16 / 9,
-	          guides: false,
-	          src: this.state.src,
-	          ref: 'cropper',
-	          crop: this._crop })
-	      ),
-	      _react2['default'].createElement(
-	        'div',
-	        { className: 'box', style: { width: '30%', float: 'right' } },
-	        _react2['default'].createElement(
-	          'h1',
-	          null,
-	          'Preview'
-	        ),
-	        _react2['default'].createElement('img', { style: { width: '100%' }, src: this.state.preview })
-	      ),
-	      _react2['default'].createElement('br', { style: { clear: 'both' } })
-	    );
-	  }
+	   }, {
+	      key: '_onChange',
+	      value: function _onChange(e) {
+	         var _this = this;
 
-	});
+	         e.preventDefault();
+	         var files = undefined;
+	         if (e.dataTransfer) {
+	            files = e.dataTransfer.files;
+	         } else if (e.target) {
+	            files = e.target.files;
+	         }
+	         var reader = new FileReader();
+	         reader.onload = function () {
+	            _this.setState({
+	               src: reader.result
+	            });
+	         };
+	         reader.readAsDataURL(files[0]);
+	      }
+	   }, {
+	      key: '_useDefaultImage',
+	      value: function _useDefaultImage() {
+	         this.setState({
+	            src: this.getInitialState().src
+	         });
+	      }
+	   }, {
+	      key: 'render',
+	      value: function render() {
+	         return _react2['default'].createElement(
+	            'div',
+	            null,
+	            _react2['default'].createElement(
+	               'div',
+	               {
+	                  className: 'box',
+	                  style: { width: '70%', float: 'left' } },
+	               _react2['default'].createElement('input', {
+	                  type: 'file',
+	                  onChange: this._onChange }),
+	               _react2['default'].createElement(
+	                  'button',
+	                  { onClick: this._useDefaultImage },
+	                  'Use default img'
+	               ),
+	               _react2['default'].createElement('br', null),
+	               _react2['default'].createElement('br', null),
+	               _react2['default'].createElement(_distReactCropper2['default'], {
+	                  style: { height: 400, width: '100%' },
+	                  aspectRatio: 16 / 9,
+	                  guides: false,
+	                  src: this.state.src,
+	                  ref: 'cropper',
+	                  build: this._build,
+	                  built: this._built,
+	                  cropstart: this._cropstart,
+	                  cropmove: this._cropmove,
+	                  cropend: this._cropend,
+	                  zoom: this._zoom,
+	                  crop: this._crop })
+	            ),
+	            _react2['default'].createElement(
+	               'div',
+	               {
+	                  className: 'box',
+	                  style: { width: '30%', float: 'right' } },
+	               _react2['default'].createElement(
+	                  'h1',
+	                  null,
+	                  'Preview'
+	               ),
+	               _react2['default'].createElement('img', {
+	                  style: { width: '100%' },
+	                  src: this.state.preview })
+	            ),
+	            _react2['default'].createElement('br', { style: { clear: 'both' } })
+	         );
+	      }
+	   }]);
+
+	   return Demo;
+	})(_react2['default'].Component);
 
 	_reactDom2['default'].render(_react2['default'].createElement(Demo, null), document.getElementById('main'));
 
@@ -19743,21 +19819,21 @@
 	'use strict';
 
 	Object.defineProperty(exports, '__esModule', {
-	  value: true
+	   value: true
 	});
 
 	var _extends = Object.assign || function (target) {
-	  for (var i = 1; i < arguments.length; i++) {
-	    var source = arguments[i];for (var key in source) {
-	      if (Object.prototype.hasOwnProperty.call(source, key)) {
-	        target[key] = source[key];
+	   for (var i = 1; i < arguments.length; i++) {
+	      var source = arguments[i];for (var key in source) {
+	         if (Object.prototype.hasOwnProperty.call(source, key)) {
+	            target[key] = source[key];
+	         }
 	      }
-	    }
-	  }return target;
+	   }return target;
 	};
 
 	function _interopRequireDefault(obj) {
-	  return obj && obj.__esModule ? obj : { 'default': obj };
+	   return obj && obj.__esModule ? obj : { 'default': obj };
 	}
 
 	var _react = __webpack_require__(2);
@@ -19772,252 +19848,174 @@
 
 	__webpack_require__(162);
 
-	/**
-	 * Utilities extracted from https://github.com/fengyuanchen/cropperjs/blob/master/src/js/utilities.js
-	 */
-
-	var REGEXP_SPACES = /\s+/;
-	var REGEXP_TRIM = /^\s+(.*)\s+$/;
-
-	function trim(str) {
-	  if (typeof str === 'string') {
-	    str = str.trim ? str.trim() : str.replace(REGEXP_TRIM, '$1');
-	  }
-
-	  return str;
-	}
-
-	function each(obj, callback) {
-	  var length;
-	  var i;
-
-	  if (obj && isFunction(callback)) {
-	    if (isArray(obj) || isNumber(obj.length) /* array-like */) {
-	        for (i = 0, length = obj.length; i < length; i++) {
-	          if (callback.call(obj, obj[i], i, obj) === false) {
-	            break;
-	          }
-	        }
-	      } else if (isObject(obj)) {
-	      for (i in obj) {
-	        if (obj.hasOwnProperty(i)) {
-	          if (callback.call(obj, obj[i], i, obj) === false) {
-	            break;
-	          }
-	        }
-	      }
-	    }
-	  }
-	  return obj;
-	}
-
-	function typeOf(obj) {
-	  return toString.call(obj).slice(8, -1).toLowerCase();
-	}
-
-	function isFunction(fn) {
-	  return typeOf(fn) === 'function';
-	}
-
-	function isArray(arr) {
-	  return Array.isArray ? Array.isArray(arr) : typeOf(arr) === 'array';
-	}
-
-	function isNumber(num) {
-	  return typeof num === 'number' && !isNaN(num);
-	}
-
-	function isObject(obj) {
-	  return typeof obj === 'object' && obj !== null;
-	}
-
-	function addListener(element, type, handler) {
-	  var types = trim(type).split(REGEXP_SPACES);
-
-	  if (types.length > 1) {
-	    return each(types, function (type) {
-	      addListener(element, type, handler);
-	    });
-	  }
-
-	  if (element.addEventListener) {
-	    element.addEventListener(type, handler, false);
-	  } else if (element.attachEvent) {
-	    element.attachEvent('on' + type, handler);
-	  }
-	}
-
-	/* end utilities */
-
 	var CropperJS = _react2['default'].createClass({
-	  displayName: 'CropperJS',
+	   displayName: 'CropperJS',
 
-	  propTypes: {
-	    // react cropper options
-	    crossOrigin: _react2['default'].PropTypes.string,
-	    src: _react2['default'].PropTypes.string,
-	    alt: _react2['default'].PropTypes.string,
+	   propTypes: {
+	      // react cropper options
+	      crossOrigin: _react2['default'].PropTypes.string,
+	      src: _react2['default'].PropTypes.string,
+	      alt: _react2['default'].PropTypes.string,
 
-	    // cropper options
-	    aspectRatio: _react2['default'].PropTypes.number,
-	    crop: _react2['default'].PropTypes.func,
-	    preview: _react2['default'].PropTypes.string,
-	    strict: _react2['default'].PropTypes.bool,
-	    responsive: _react2['default'].PropTypes.bool,
-	    checkImageOrigin: _react2['default'].PropTypes.bool,
-	    background: _react2['default'].PropTypes.bool,
-	    modal: _react2['default'].PropTypes.bool,
-	    guides: _react2['default'].PropTypes.bool,
-	    highlight: _react2['default'].PropTypes.bool,
-	    autoCrop: _react2['default'].PropTypes.bool,
-	    autoCropArea: _react2['default'].PropTypes.number,
-	    dragCrop: _react2['default'].PropTypes.bool,
-	    movable: _react2['default'].PropTypes.bool,
-	    cropBoxMovable: _react2['default'].PropTypes.bool,
-	    cropBoxResizable: _react2['default'].PropTypes.bool,
-	    doubleClickToggle: _react2['default'].PropTypes.bool,
-	    zoomable: _react2['default'].PropTypes.bool,
-	    mouseWheelZoom: _react2['default'].PropTypes.bool,
-	    touchDragZoom: _react2['default'].PropTypes.bool,
-	    rotatable: _react2['default'].PropTypes.bool,
-	    minContainerWidth: _react2['default'].PropTypes.number,
-	    minContainerHeight: _react2['default'].PropTypes.number,
-	    minCanvasWidth: _react2['default'].PropTypes.number,
-	    minCanvasHeight: _react2['default'].PropTypes.number,
-	    minCropBoxWidth: _react2['default'].PropTypes.number,
-	    minCropBoxHeight: _react2['default'].PropTypes.number,
-	    build: _react2['default'].PropTypes.func,
-	    built: _react2['default'].PropTypes.func,
-	    dragstart: _react2['default'].PropTypes.func,
-	    dragmove: _react2['default'].PropTypes.func,
-	    dragend: _react2['default'].PropTypes.func,
-	    zoomin: _react2['default'].PropTypes.func,
-	    zoomout: _react2['default'].PropTypes.func
-	  },
+	      // cropper options
+	      aspectRatio: _react2['default'].PropTypes.number,
+	      crop: _react2['default'].PropTypes.func,
+	      preview: _react2['default'].PropTypes.string,
+	      strict: _react2['default'].PropTypes.bool,
+	      responsive: _react2['default'].PropTypes.bool,
+	      checkImageOrigin: _react2['default'].PropTypes.bool,
+	      background: _react2['default'].PropTypes.bool,
+	      modal: _react2['default'].PropTypes.bool,
+	      guides: _react2['default'].PropTypes.bool,
+	      highlight: _react2['default'].PropTypes.bool,
+	      autoCrop: _react2['default'].PropTypes.bool,
+	      autoCropArea: _react2['default'].PropTypes.number,
+	      dragCrop: _react2['default'].PropTypes.bool,
+	      movable: _react2['default'].PropTypes.bool,
+	      cropBoxMovable: _react2['default'].PropTypes.bool,
+	      cropBoxResizable: _react2['default'].PropTypes.bool,
+	      doubleClickToggle: _react2['default'].PropTypes.bool,
+	      zoomable: _react2['default'].PropTypes.bool,
+	      mouseWheelZoom: _react2['default'].PropTypes.bool,
+	      touchDragZoom: _react2['default'].PropTypes.bool,
+	      rotatable: _react2['default'].PropTypes.bool,
+	      minContainerWidth: _react2['default'].PropTypes.number,
+	      minContainerHeight: _react2['default'].PropTypes.number,
+	      minCanvasWidth: _react2['default'].PropTypes.number,
+	      minCanvasHeight: _react2['default'].PropTypes.number,
+	      minCropBoxWidth: _react2['default'].PropTypes.number,
+	      minCropBoxHeight: _react2['default'].PropTypes.number,
 
-	  getDefaultProps: function getDefaultProps() {
-	    return {
-	      src: null
-	    };
-	  },
+	      // cropper callbacks
+	      build: _react2['default'].PropTypes.func,
+	      built: _react2['default'].PropTypes.func,
+	      cropstart: _react2['default'].PropTypes.func,
+	      cropmove: _react2['default'].PropTypes.func,
+	      cropend: _react2['default'].PropTypes.func,
+	      crop: _react2['default'].PropTypes.func,
+	      zoom: _react2['default'].PropTypes.func
+	   },
 
-	  componentDidMount: function componentDidMount() {
-	    var options = {};
-	    for (var prop in this.props) {
-	      if (prop !== 'src' && prop !== 'alt' && prop !== 'crossOrigin') {
-	        options[prop] = this.props[prop];
+	   getDefaultProps: function getDefaultProps() {
+	      return {
+	         src: null
+	      };
+	   },
+
+	   componentDidMount: function componentDidMount() {
+	      var options = {};
+	      for (var prop in this.props) {
+	         if (prop !== 'src' && prop !== 'alt' && prop !== 'crossOrigin') {
+	            options[prop] = this.props[prop];
+	         }
 	      }
-	    }
-	    this.cropper = new _cropperjs2['default'](this.refs.img, options);
-	  },
+	      this.cropper = new _cropperjs2['default'](this.refs.img, options);
+	   },
 
-	  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
-	    if (nextProps.src !== this.props.src) {
-	      this.replace(nextProps.src);
-	    }
-	    if (nextProps.aspectRatio !== this.props.aspectRatio) {
-	      this.setAspectRatio(nextProps.aspectRatio);
-	    }
-	  },
-
-	  componentWillUnmount: function componentWillUnmount() {
-	    if (this.cropper) {
-	      // Destroy the cropper, this makes sure events such as resize are cleaned up and do not leak
-	      this.cropper.destroy();
-	      // While we're at it remove our reference to the jQuery instance
-	      //   delete this.$img;
-	    }
-	  },
-
-	  move: function move(offsetX, offsetY) {
-	    return this.cropper.move(offsetX, offsetY);
-	  },
-
-	  zoom: function zoom(ratio) {
-	    return this.cropper.zoom(ratio);
-	  },
-
-	  rotate: function rotate(degree) {
-	    return this.cropper.rotate(degree);
-	  },
-
-	  enable: function enable() {
-	    return this.cropper.enable();
-	  },
-
-	  disable: function disable() {
-	    return this.cropper.disable();
-	  },
-
-	  reset: function reset() {
-	    return this.cropper.reset();
-	  },
-
-	  clear: function clear() {
-	    return this.cropper.clear();
-	  },
-
-	  replace: function replace(url) {
-	    return this.cropper.replace(url);
-	  },
-
-	  getData: function getData(rounded) {
-	    return this.cropper.getData(rounded);
-	  },
-
-	  getContainerData: function getContainerData() {
-	    return this.cropper.getContainerData();
-	  },
-
-	  getImageData: function getImageData() {
-	    return this.cropper.getImageData();
-	  },
-
-	  getCanvasData: function getCanvasData() {
-	    return this.cropper.getCanvasData();
-	  },
-
-	  setCanvasData: function setCanvasData(data) {
-	    return this.cropper.setCanvasData(data);
-	  },
-
-	  getCropBoxData: function getCropBoxData() {
-	    return this.cropper.getCropBoxData();
-	  },
-
-	  setCropBoxData: function setCropBoxData(data) {
-	    return this.cropper.setCropBoxData(data);
-	  },
-
-	  getCroppedCanvas: function getCroppedCanvas(options) {
-	    return this.cropper.getCroppedCanvas(options);
-	  },
-
-	  setAspectRatio: function setAspectRatio(aspectRatio) {
-	    return this.cropper.setAspectRatio(aspectRatio);
-	  },
-
-	  setDragMode: function setDragMode() {
-	    return this.cropper.setDragMode();
-	  },
-
-	  on: function on(eventname, callback) {
-	    console.log(eventname);
-	    // return this.$img.on(eventname, callback);
-	    return addListener(this.cropper, eventname, callback);
-	  },
-
-	  render: function render() {
-	    return _react2['default'].createElement('div', _extends({}, this.props, { src: null, crossOrigin: null, alt: null }), _react2['default'].createElement('img', {
-	      crossOrigin: this.props.crossOrigin,
-	      ref: 'img',
-	      src: this.props.src,
-	      alt: this.props.alt === undefined ? 'picture' : this.props.alt,
-	      style: {
-	        opacity: 0
+	   componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
+	      if (nextProps.src !== this.props.src) {
+	         this.replace(nextProps.src);
 	      }
-	    }));
-	  }
+	      if (nextProps.aspectRatio !== this.props.aspectRatio) {
+	         this.setAspectRatio(nextProps.aspectRatio);
+	      }
+	   },
+
+	   componentWillUnmount: function componentWillUnmount() {
+	      if (this.cropper) {
+	         // Destroy the cropper, this makes sure events such as resize are cleaned up and do not leak
+	         this.cropper.destroy();
+	         // While we're at it remove our reference to the jQuery instance
+	         //   delete this.$img;
+	      }
+	   },
+
+	   move: function move(offsetX, offsetY) {
+	      return this.cropper.move(offsetX, offsetY);
+	   },
+
+	   zoom: function zoom(ratio) {
+	      return this.cropper.zoom(ratio);
+	   },
+
+	   rotate: function rotate(degree) {
+	      return this.cropper.rotate(degree);
+	   },
+
+	   enable: function enable() {
+	      return this.cropper.enable();
+	   },
+
+	   disable: function disable() {
+	      return this.cropper.disable();
+	   },
+
+	   reset: function reset() {
+	      return this.cropper.reset();
+	   },
+
+	   clear: function clear() {
+	      return this.cropper.clear();
+	   },
+
+	   replace: function replace(url) {
+	      return this.cropper.replace(url);
+	   },
+
+	   getData: function getData(rounded) {
+	      return this.cropper.getData(rounded);
+	   },
+
+	   getContainerData: function getContainerData() {
+	      return this.cropper.getContainerData();
+	   },
+
+	   getImageData: function getImageData() {
+	      return this.cropper.getImageData();
+	   },
+
+	   getCanvasData: function getCanvasData() {
+	      return this.cropper.getCanvasData();
+	   },
+
+	   setCanvasData: function setCanvasData(data) {
+	      return this.cropper.setCanvasData(data);
+	   },
+
+	   getCropBoxData: function getCropBoxData() {
+	      return this.cropper.getCropBoxData();
+	   },
+
+	   setCropBoxData: function setCropBoxData(data) {
+	      return this.cropper.setCropBoxData(data);
+	   },
+
+	   getCroppedCanvas: function getCroppedCanvas(options) {
+	      return this.cropper.getCroppedCanvas(options);
+	   },
+
+	   setAspectRatio: function setAspectRatio(aspectRatio) {
+	      return this.cropper.setAspectRatio(aspectRatio);
+	   },
+
+	   setDragMode: function setDragMode() {
+	      return this.cropper.setDragMode();
+	   },
+
+	   render: function render() {
+	      var imgStyle = {
+	         opacity: 0
+	      };
+	      return _react2['default'].createElement('div', _extends({}, this.props, {
+	         src: null,
+	         crossOrigin: null,
+	         alt: null }), _react2['default'].createElement('img', {
+	         crossOrigin: this.props.crossOrigin,
+	         ref: 'img',
+	         src: this.props.src,
+	         alt: this.props.alt === undefined ? 'picture' : this.props.alt,
+	         style: imgStyle }));
+	   }
 	});
 
 	exports['default'] = CropperJS;
