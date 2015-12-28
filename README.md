@@ -81,7 +81,7 @@ var React = require('react');
 var CropperJS = require('react-cropperjs');
 
 var Demo = React.createClass({
-  
+
   _crop: function(){
     // image in dataUrl
     console.log(this.refs.cropper.getCroppedCanvas().toDataURL());
@@ -116,13 +116,13 @@ var Demo = React.createClass({
 
 ### Other options
 
-Accepts all options availabe in cropperjs as attributes. See [docs](https://github.com/fengyuanchen/cropperjs).
+Accepts all options available in cropperjs as attributes. See [docs](https://github.com/fengyuanchen/cropperjs).
 
 ```js
   <CropperJS
     src='http://i.imgur.com/n483ZwJ.jpg'
-    aspectRatio={16 / 9} 
-    guides={false} 
+    aspectRatio={16 / 9}
+    guides={false}
     crop={this._crop} />
 ```
 
@@ -134,7 +134,7 @@ Assign a `ref` attribute to use [methods](https://github.com/fengyuanchen/croppe
 import React from 'react';
 import CropperJS from 'react-cropperjs';
 
-class Demo extends React.Component = {
+class Demo extends React.Component {
 
   _crop() {
     let dataUrl = this.refs.cropper.getCroppedCanvas().toDataURL();
@@ -145,6 +145,7 @@ class Demo extends React.Component = {
     return (
       <CropperJS
         ref='cropper'
+        src='http://i.imgur.com/n483ZwJ.jpg'
         crop={this._crop.bind(this)} />
     );
   }
@@ -153,19 +154,68 @@ class Demo extends React.Component = {
 
 `React.createClass` has a built-in magic feature that bound all methods to `this` automatically for you. In ES6, remember to pre-bind in the constructor or in the attribute. See [autobinding](https://facebook.github.io/react/blog/2015/01/27/react-v0.13.0-beta-1.html#autobinding) docs for more details.
 
-## Events
+## Callbacks
 
-Assign [Events](https://github.com/fengyuanchen/cropper#events) handler with `.on(eventname, callback)` and `ref`.
+Unlike cropper, cropperjs doesn't support events, it supports the following callbacks:
+
+* [build](https://github.com/fengyuanchen/cropperjs#build)
+* [built](https://github.com/fengyuanchen/cropperjs#built)
+* [cropstart](https://github.com/fengyuanchen/cropperjs#cropstart)
+* [cropmove](https://github.com/fengyuanchen/cropperjs#cropmove)
+* [cropend](https://github.com/fengyuanchen/cropperjs#cropend)
+* [crop](https://github.com/fengyuanchen/cropperjs#crop)
+* [zoom](https://github.com/fengyuanchen/cropperjs#zoom)
 
 ```js
 
-componentDidMount: function(){
-  this.refs.cropper.on('dragstart.cropper', function (e) {
-    console.log(e.type); // dragstart
-    console.log(e.namespace); // cropper
-    console.log(e.dragType); // ...
-  });
-},
+import React from 'react';
+import CropperJS from 'react-cropperjs';
+
+class CallbackDemo extends React.Component {
+
+   _build() {
+      console.log('_build');
+   }
+
+   _built() {
+      console.log('_built');
+   }
+
+   _cropstart(data) {
+      console.log('_cropstart', data.action);
+   }
+
+   _cropmove(data) {
+      console.log('_cropmove', data.action);
+   }
+
+   _cropend(data) {
+      console.log('_cropend', data.action);
+   }
+
+   _zoom(data) {
+      console.log('_zoom', data.ratio);
+   }
+
+   _crop(data) {
+      console.log('_crop', data);
+   }
+
+   render() {
+      return (
+         <CropperJS
+           ref='cropper'
+           src='http://i.imgur.com/n483ZwJ.jpg'
+           build={this._build}
+           built={this._built}
+           cropstart={this._cropstart}
+           cropmove={this._cropmove}
+           cropend={this._cropend}
+           zoom={this._zoom}
+           crop={this._crop} />
+         );
+   }
+}
 
 ```
 
