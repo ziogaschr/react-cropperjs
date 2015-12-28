@@ -8,7 +8,8 @@ class Demo extends React.Component {
    constructor() {
       super();
       this.state = {
-         src: 'http://i.imgur.com/n483ZwJ.jpg',
+         src: 'http://i.imgur.com/n483ZwJ.jpg', // tapptv image (small)
+         //  src: 'http://i.imgur.com/1gpjD9I.jpg', // iphone sky photo (large)
          preview: null
       };
       this._crop = this._crop.bind(this);
