@@ -167,40 +167,31 @@ Unlike cropper, cropperjs doesn't support events, it supports the following call
 * [zoom](https://github.com/fengyuanchen/cropperjs#zoom)
 
 ```js
-
 import React from 'react';
 import CropperJS from 'react-cropperjs';
 
 class CallbackDemo extends React.Component {
-
    _build() {
       console.log('_build');
    }
-
    _built() {
       console.log('_built');
    }
-
    _cropstart(data) {
       console.log('_cropstart', data.action);
    }
-
    _cropmove(data) {
       console.log('_cropmove', data.action);
    }
-
    _cropend(data) {
       console.log('_cropend', data.action);
    }
-
    _zoom(data) {
       console.log('_zoom', data.ratio);
    }
-
    _crop(data) {
       console.log('_crop', data);
    }
-
    render() {
       return (
          <CropperJS
@@ -216,7 +207,6 @@ class CallbackDemo extends React.Component {
          );
    }
 }
-
 ```
 
 ## Build
