@@ -134,12 +134,12 @@
 <h3>
 <a id="other-options" class="anchor" href="#other-options" aria-hidden="true"><span class="octicon octicon-link"></span></a>Other options</h3>
 
-<p>Accepts all options availabe in cropperjs as attributes. See <a href="https://github.com/fengyuanchen/cropperjs">docs</a>.</p>
+<p>Accepts all options available in cropperjs as attributes. See <a href="https://github.com/fengyuanchen/cropperjs">docs</a>.</p>
 
 <div class="highlight highlight-source-js"><pre>  <span class="pl-k">&lt;</span>CropperJS
     src<span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">'</span>http://i.imgur.com/n483ZwJ.jpg<span class="pl-pds">'</span></span>
-    aspectRatio<span class="pl-k">=</span>{<span class="pl-c1">16</span> <span class="pl-k">/</span> <span class="pl-c1">9</span>} 
-    guides<span class="pl-k">=</span>{<span class="pl-c1">false</span>} 
+    aspectRatio<span class="pl-k">=</span>{<span class="pl-c1">16</span> <span class="pl-k">/</span> <span class="pl-c1">9</span>}
+    guides<span class="pl-k">=</span>{<span class="pl-c1">false</span>}
     crop<span class="pl-k">=</span>{<span class="pl-v">this</span>.<span class="pl-smi">_crop</span>} <span class="pl-k">/</span><span class="pl-k">&gt;</span></pre></div>
 
 <h2>
@@ -150,7 +150,7 @@
 <div class="highlight highlight-source-js"><pre><span class="pl-k">import</span> <span class="pl-smi">React</span> <span class="pl-k">from</span> <span class="pl-s"><span class="pl-pds">'</span>react<span class="pl-pds">'</span></span>;
 <span class="pl-k">import</span> <span class="pl-smi">CropperJS</span> <span class="pl-k">from</span> <span class="pl-s"><span class="pl-pds">'</span>react-cropperjs<span class="pl-pds">'</span></span>;
 
-<span class="pl-k">class</span> <span class="pl-en">Demo</span> <span class="pl-k">extends</span> <span class="pl-en">React</span>.<span class="pl-smi">Component</span> <span class="pl-k">=</span> {
+<span class="pl-k">class</span> <span class="pl-en">Demo</span> <span class="pl-k">extends</span> <span class="pl-en">React</span>.<span class="pl-smi">Component</span> {
 
   <span class="pl-en">_crop</span>() {
     <span class="pl-k">let</span> dataUrl <span class="pl-k">=</span> <span class="pl-v">this</span>.<span class="pl-smi">refs</span>.<span class="pl-smi">cropper</span>.<span class="pl-en">getCroppedCanvas</span>().<span class="pl-en">toDataURL</span>();
@@ -161,6 +161,7 @@
     <span class="pl-k">return</span> (
       <span class="pl-k">&lt;</span>CropperJS
         ref<span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">'</span>cropper<span class="pl-pds">'</span></span>
+        src<span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">'</span>http://i.imgur.com/n483ZwJ.jpg<span class="pl-pds">'</span></span>
         crop<span class="pl-k">=</span>{<span class="pl-v">this</span>.<span class="pl-smi">_crop</span>.<span class="pl-en">bind</span>(<span class="pl-v">this</span>)} <span class="pl-k">/</span><span class="pl-k">&gt;</span>
     );
   }
@@ -169,19 +170,60 @@
 <p><code>React.createClass</code> has a built-in magic feature that bound all methods to <code>this</code> automatically for you. In ES6, remember to pre-bind in the constructor or in the attribute. See <a href="https://facebook.github.io/react/blog/2015/01/27/react-v0.13.0-beta-1.html#autobinding">autobinding</a> docs for more details.</p>
 
 <h2>
-<a id="events" class="anchor" href="#events" aria-hidden="true"><span class="octicon octicon-link"></span></a>Events</h2>
+<a id="callbacks" class="anchor" href="#callbacks" aria-hidden="true"><span class="octicon octicon-link"></span></a>Callbacks</h2>
 
-<p>Assign <a href="https://github.com/fengyuanchen/cropper#events">Events</a> handler with <code>.on(eventname, callback)</code> and <code>ref</code>.</p>
+<p>Unlike cropper, cropperjs doesn't support events, it supports the following callbacks:</p>
 
-<div class="highlight highlight-source-js"><pre>
-<span class="pl-en">componentDidMount</span><span class="pl-k">:</span> <span class="pl-k">function</span>(){
-  <span class="pl-v">this</span>.<span class="pl-smi">refs</span>.<span class="pl-smi">cropper</span>.<span class="pl-en">on</span>(<span class="pl-s"><span class="pl-pds">'</span>dragstart.cropper<span class="pl-pds">'</span></span>, <span class="pl-k">function</span> (<span class="pl-smi">e</span>) {
-    <span class="pl-en">console</span>.<span class="pl-c1">log</span>(<span class="pl-smi">e</span>.<span class="pl-c1">type</span>); <span class="pl-c">// dragstart</span>
-    <span class="pl-en">console</span>.<span class="pl-c1">log</span>(<span class="pl-smi">e</span>.<span class="pl-smi">namespace</span>); <span class="pl-c">// cropper</span>
-    <span class="pl-en">console</span>.<span class="pl-c1">log</span>(<span class="pl-smi">e</span>.<span class="pl-smi">dragType</span>); <span class="pl-c">// ...</span>
-  });
-},
-</pre></div>
+<ul>
+<li><a href="https://github.com/fengyuanchen/cropperjs#build">build</a></li>
+<li><a href="https://github.com/fengyuanchen/cropperjs#built">built</a></li>
+<li><a href="https://github.com/fengyuanchen/cropperjs#cropstart">cropstart</a></li>
+<li><a href="https://github.com/fengyuanchen/cropperjs#cropmove">cropmove</a></li>
+<li><a href="https://github.com/fengyuanchen/cropperjs#cropend">cropend</a></li>
+<li><a href="https://github.com/fengyuanchen/cropperjs#crop">crop</a></li>
+<li><a href="https://github.com/fengyuanchen/cropperjs#zoom">zoom</a></li>
+</ul>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-k">import</span> <span class="pl-smi">React</span> <span class="pl-k">from</span> <span class="pl-s"><span class="pl-pds">'</span>react<span class="pl-pds">'</span></span>;
+<span class="pl-k">import</span> <span class="pl-smi">CropperJS</span> <span class="pl-k">from</span> <span class="pl-s"><span class="pl-pds">'</span>react-cropperjs<span class="pl-pds">'</span></span>;
+
+<span class="pl-k">class</span> <span class="pl-en">CallbackDemo</span> <span class="pl-k">extends</span> <span class="pl-en">React</span>.<span class="pl-smi">Component</span> {
+   <span class="pl-en">_build</span>() {
+      <span class="pl-en">console</span>.<span class="pl-c1">log</span>(<span class="pl-s"><span class="pl-pds">'</span>_build<span class="pl-pds">'</span></span>);
+   }
+   <span class="pl-en">_built</span>() {
+      <span class="pl-en">console</span>.<span class="pl-c1">log</span>(<span class="pl-s"><span class="pl-pds">'</span>_built<span class="pl-pds">'</span></span>);
+   }
+   <span class="pl-en">_cropstart</span>(<span class="pl-smi">data</span>) {
+      <span class="pl-en">console</span>.<span class="pl-c1">log</span>(<span class="pl-s"><span class="pl-pds">'</span>_cropstart<span class="pl-pds">'</span></span>, <span class="pl-smi">data</span>.<span class="pl-c1">action</span>);
+   }
+   <span class="pl-en">_cropmove</span>(<span class="pl-smi">data</span>) {
+      <span class="pl-en">console</span>.<span class="pl-c1">log</span>(<span class="pl-s"><span class="pl-pds">'</span>_cropmove<span class="pl-pds">'</span></span>, <span class="pl-smi">data</span>.<span class="pl-c1">action</span>);
+   }
+   <span class="pl-en">_cropend</span>(<span class="pl-smi">data</span>) {
+      <span class="pl-en">console</span>.<span class="pl-c1">log</span>(<span class="pl-s"><span class="pl-pds">'</span>_cropend<span class="pl-pds">'</span></span>, <span class="pl-smi">data</span>.<span class="pl-c1">action</span>);
+   }
+   <span class="pl-en">_zoom</span>(<span class="pl-smi">data</span>) {
+      <span class="pl-en">console</span>.<span class="pl-c1">log</span>(<span class="pl-s"><span class="pl-pds">'</span>_zoom<span class="pl-pds">'</span></span>, <span class="pl-smi">data</span>.<span class="pl-smi">ratio</span>);
+   }
+   <span class="pl-en">_crop</span>(<span class="pl-smi">data</span>) {
+      <span class="pl-en">console</span>.<span class="pl-c1">log</span>(<span class="pl-s"><span class="pl-pds">'</span>_crop<span class="pl-pds">'</span></span>, data);
+   }
+   <span class="pl-en">render</span>() {
+      <span class="pl-k">return</span> (
+         <span class="pl-k">&lt;</span>CropperJS
+           ref<span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">'</span>cropper<span class="pl-pds">'</span></span>
+           src<span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">'</span>http://i.imgur.com/n483ZwJ.jpg<span class="pl-pds">'</span></span>
+           build<span class="pl-k">=</span>{<span class="pl-v">this</span>.<span class="pl-smi">_build</span>}
+           built<span class="pl-k">=</span>{<span class="pl-v">this</span>.<span class="pl-smi">_built</span>}
+           cropstart<span class="pl-k">=</span>{<span class="pl-v">this</span>.<span class="pl-smi">_cropstart</span>}
+           cropmove<span class="pl-k">=</span>{<span class="pl-v">this</span>.<span class="pl-smi">_cropmove</span>}
+           cropend<span class="pl-k">=</span>{<span class="pl-v">this</span>.<span class="pl-smi">_cropend</span>}
+           zoom<span class="pl-k">=</span>{<span class="pl-v">this</span>.<span class="pl-smi">_zoom</span>}
+           crop<span class="pl-k">=</span>{<span class="pl-v">this</span>.<span class="pl-smi">_crop</span>} <span class="pl-k">/</span><span class="pl-k">&gt;</span>
+         );
+   }
+}</pre></div>
 
 <h2>
 <a id="build" class="anchor" href="#build" aria-hidden="true"><span class="octicon octicon-link"></span></a>Build</h2>
