@@ -13,6 +13,8 @@ class Demo extends React.Component {
          preview: null
       };
       this._crop = this._crop.bind(this);
+      this._onChange = this._onChange.bind(this);
+      this._useDefaultImage = this._useDefaultImage.bind(this);
    }
 
    // Callback functions
