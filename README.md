@@ -82,7 +82,7 @@ var CropperJS = require('react-cropperjs');
 
 var Demo = React.createClass({
 
-  _crop: function(){
+  _crop: function() {
     // image in dataUrl
     console.log(this.refs.cropper.getCroppedCanvas().toDataURL());
   },
@@ -152,11 +152,11 @@ class Demo extends React.Component {
 }
 ```
 
-`React.createClass` has a built-in magic feature that bound all methods to `this` automatically for you. In ES6, remember to pre-bind in the constructor or in the attribute. See [autobinding](https://facebook.github.io/react/blog/2015/01/27/react-v0.13.0-beta-1.html#autobinding) docs for more details.
+`React.createClass` has a built-in magic feature that binds all methods to `this` automatically for you. When using ES6 syntax, remember to pre-bind in the constructor or in the attribute (as shown in the above example). Otherwise See [autobinding](https://facebook.github.io/react/blog/2015/01/27/react-v0.13.0-beta-1. html#autobinding) docs for more details.
 
 ## Callbacks
 
-Unlike cropper, cropperjs doesn't support events, it supports the following callbacks:
+Unlike `cropper`, `cropperjs` doesn't support events, it supports the following callbacks:
 
 * [build](https://github.com/fengyuanchen/cropperjs#build)
 * [built](https://github.com/fengyuanchen/cropperjs#built)
@@ -208,6 +208,8 @@ class CallbackDemo extends React.Component {
    }
 }
 ```
+
+Remember to bind `this` in the attributes or pre-bind constructor if you're going to be accessing `this` in the callback methods.
 
 ## Build
 
