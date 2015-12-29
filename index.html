@@ -96,7 +96,7 @@
 
 <span class="pl-k">var</span> Demo <span class="pl-k">=</span> <span class="pl-smi">React</span>.<span class="pl-en">createClass</span>({
 
-  <span class="pl-en">_crop</span><span class="pl-k">:</span> <span class="pl-k">function</span>(){
+  <span class="pl-en">_crop</span><span class="pl-k">:</span> <span class="pl-k">function</span>() {
     <span class="pl-c">// image in dataUrl</span>
     <span class="pl-en">console</span>.<span class="pl-c1">log</span>(<span class="pl-v">this</span>.<span class="pl-smi">refs</span>.<span class="pl-smi">cropper</span>.<span class="pl-en">getCroppedCanvas</span>().<span class="pl-en">toDataURL</span>());
   },
@@ -167,12 +167,12 @@
   }
 }</pre></div>
 
-<p><code>React.createClass</code> has a built-in magic feature that bound all methods to <code>this</code> automatically for you. In ES6, remember to pre-bind in the constructor or in the attribute. See <a href="https://facebook.github.io/react/blog/2015/01/27/react-v0.13.0-beta-1.html#autobinding">autobinding</a> docs for more details.</p>
+<p><code>React.createClass</code> has a built-in magic feature that binds all methods to <code>this</code> automatically for you. When using ES6 syntax, remember to pre-bind in the constructor or in the attribute (as shown in the above example). Otherwise See <a href="https://facebook.github.io/react/blog/2015/01/27/react-v0.13.0-beta-1.%20html#autobinding">autobinding</a> docs for more details.</p>
 
 <h2>
 <a id="callbacks" class="anchor" href="#callbacks" aria-hidden="true"><span class="octicon octicon-link"></span></a>Callbacks</h2>
 
-<p>Unlike cropper, cropperjs doesn't support events, it supports the following callbacks:</p>
+<p>Unlike <code>cropper</code>, <code>cropperjs</code> doesn't support events, it supports the following callbacks:</p>
 
 <ul>
 <li><a href="https://github.com/fengyuanchen/cropperjs#build">build</a></li>
@@ -224,6 +224,8 @@
          );
    }
 }</pre></div>
+
+<p>Remember to bind <code>this</code> in the attributes or pre-bind constructor if you're going to be accessing <code>this</code> in the callback methods.</p>
 
 <h2>
 <a id="build" class="anchor" href="#build" aria-hidden="true"><span class="octicon octicon-link"></span></a>Build</h2>
