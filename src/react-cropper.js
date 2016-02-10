@@ -120,6 +120,10 @@ const CropperJS = React.createClass({
       return this.cropper.getData(rounded);
    },
 
+   setData(data) {
+      return this.cropper.setData(data);
+   },
+
    getContainerData() {
       return this.cropper.getContainerData();
    },
