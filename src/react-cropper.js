@@ -47,7 +47,6 @@ const CropperJS = React.createClass({
       cropstart: React.PropTypes.func,
       cropmove: React.PropTypes.func,
       cropend: React.PropTypes.func,
-      crop: React.PropTypes.func,
       zoom: React.PropTypes.func
    },
 
