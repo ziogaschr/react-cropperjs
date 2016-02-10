@@ -13,6 +13,7 @@
     "no-multi-str": 0,
     "quotes": [1, "single"],
     "no-underscore-dangle": 0,
+    "no-dupe-keys": 1,
     "comma-dangle": 0,
     "strict": 0,
     "react/jsx-quotes": 1,
