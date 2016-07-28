@@ -4,8 +4,6 @@ Object.defineProperty(exports, '__esModule', {
    value: true
 });
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
 var _react = require('react');
@@ -28,6 +26,7 @@ var CropperJS = _react2['default'].createClass({
       crossOrigin: _react2['default'].PropTypes.string,
       src: _react2['default'].PropTypes.string,
       alt: _react2['default'].PropTypes.string,
+      style: _react2['default'].PropTypes.object,
 
       // cropper options
       aspectRatio: _react2['default'].PropTypes.number,
@@ -183,10 +182,11 @@ var CropperJS = _react2['default'].createClass({
       };
       return _react2['default'].createElement(
          'div',
-         _extends({}, this.props, {
+         {
+            style: this.props.style,
             src: null,
             crossOrigin: null,
-            alt: null }),
+            alt: null },
          _react2['default'].createElement('img', {
             crossOrigin: this.props.crossOrigin,
             ref: 'img',
