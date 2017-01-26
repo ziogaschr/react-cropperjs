@@ -11,6 +11,7 @@ const CropperJS = React.createClass({
       crossOrigin: React.PropTypes.string,
       src: React.PropTypes.string,
       alt: React.PropTypes.string,
+      style: React.PropTypes.object,
 
       // cropper options
       aspectRatio: React.PropTypes.number,
@@ -166,7 +167,7 @@ const CropperJS = React.createClass({
       };
       return (
          <div
-           {...this.props}
+           style={this.props.style}
            src={null}
            crossOrigin={null}
            alt={null}>
