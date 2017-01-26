@@ -8,6 +8,7 @@ class Demo extends React.Component {
    constructor() {
       super();
       this.state = {
+         defaultSrc: 'http://i.imgur.com/n483ZwJ.jpg',
          src: 'http://i.imgur.com/n483ZwJ.jpg', // tapptv image (small)
          //  src: 'http://i.imgur.com/1gpjD9I.jpg', // iphone sky photo (large)
          preview: null
@@ -69,7 +70,7 @@ class Demo extends React.Component {
 
    _useDefaultImage() {
       this.setState({
-         src: this.getInitialState().src
+         src: this.state.defaultSrc
       });
    }
 
