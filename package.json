@@ -27,10 +27,12 @@
     "url": "https://github.com/TAPP-TV/react-cropperjs.git"
   },
   "dependencies": {
-    "cropperjs": "^0.8.1"
+    "cropperjs": "^0.8.1",
+    "prop-types": "^15.5.10"
   },
   "peerDependencies": {
-    "react": ">=0.14.0"
+    "react": ">=16.0.0",
+    "react-dom": ">=16.0.0"
   },
   "devDependencies": {
     "babel": "^5.8.23",
@@ -41,8 +43,8 @@
     "eslint-plugin-babel": "^2.1.1",
     "eslint-plugin-react": "^3.3.2",
     "extract-text-webpack-plugin": "^0.8.2",
-    "react": "^0.14.0",
-    "react-dom": "^0.14.0",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
     "style-loader": "^0.12.3",
     "webpack": "^1.12.1"
   }

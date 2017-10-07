@@ -78,10 +78,10 @@ class Demo extends React.Component {
       return (
          <div>
              <div
-               className='box'
+               className="box"
                style={{   width: '70%',   float: 'left'}}>
                  <input
-                   type='file'
+                   type="file"
                    onChange={this._onChange} />
                  <button onClick={this._useDefaultImage}>
                      Use default img
@@ -93,7 +93,7 @@ class Demo extends React.Component {
                    aspectRatio={16 / 9}
                    guides={false}
                    src={this.state.src}
-                   ref='cropper'
+                   ref="cropper"
                    build={this._build}
                    built={this._built}
                    cropstart={this._cropstart}
@@ -103,7 +103,7 @@ class Demo extends React.Component {
                    crop={this._crop} />
              </div>
              <div
-               className='box'
+               className="box"
                style={{   width: '30%',   float: 'right'}}>
                  <h1>Preview</h1>
                  <img

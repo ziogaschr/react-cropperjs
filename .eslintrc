@@ -16,7 +16,7 @@
     "no-dupe-keys": 1,
     "comma-dangle": 0,
     "strict": 0,
-    "react/jsx-quotes": 1,
+    "jsx-quotes": 1,
     "react/jsx-no-undef": 1,
     "react/jsx-uses-react": 1,
     "react/jsx-uses-vars": 1,
