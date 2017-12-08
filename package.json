@@ -27,7 +27,7 @@
     "url": "https://github.com/TAPP-TV/react-cropperjs.git"
   },
   "dependencies": {
-    "cropperjs": "^0.8.1",
+    "cropperjs": "^1.1.3",
     "prop-types": "^15.5.10"
   },
   "peerDependencies": {
